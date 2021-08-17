@@ -15,7 +15,7 @@ sys.path.insert(0, parentdir)
 from selenium import webdriver
 
 # Local Imports
-from pages.pages import HomePage
+from pages.pages import LoginPage
 from utils.test_data import TestData
 
 
@@ -35,3 +35,19 @@ class Test_HUDL_Base(unittest.TestCase):
         """
         self.driver.close()
         self.driver.quit()
+
+
+class Test_HUDL_Login(Test_HUDL_Base):
+    """
+    Testing HUDL Login.
+    """
+
+    def setUp(self):
+        super().setUp()
+
+    def test_login_page_loaded_successfully(self):
+        """
+        Assert if 'Log In - Hudl' is in the page title
+        """
+        self.loginpage = LoginPage(self.driver)
+        self.assertIn(TestData.LOGIN_TITLE, self.loginpage.driver.title)
