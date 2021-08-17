@@ -2,6 +2,7 @@
 import inspect
 import os
 import sys
+import time
 import unittest
 
 # Used to get the current directory of this file
@@ -45,17 +46,18 @@ class Test_HUDL_Login(Test_HUDL_Base):
     def setUp(self):
         super().setUp()
 
-    def test_login_page_loaded_successfully(self):
+    def test_001_login_page_loaded_successfully(self):
         """
         Assert if 'Log In - Hudl' is in the page title
         """
         self.loginpage = LoginPage(self.driver)
         self.assertIn(TestData.LOGIN_TITLE, self.loginpage.driver.title)
 
-    def test_login_successfull(self):
+    def test_002_login_successfull(self):
         """
         Assert if with the right credentials you can login to the site.
         """
         self.loginpage = LoginPage(self.driver)
         self.loginpage.login()
+        time.sleep(3)
         self.assertIn(TestData.LOGGED_IN_TITLE, self.loginpage.driver.title)
