@@ -1,5 +1,13 @@
+from utils import env
+
+
 class TestData:
-    CHROME_EXECUTABLE_PATH = (
-        "/Users/thomasmuat/Workspace/hudl_qa/hudl_qa/drivers/chromedriver"
-    )
-    BASE_URL = "https://www.hudl.com/en_gb/"
+    # Global Variables
+    CHROME_EXECUTABLE_PATH = env.chrome_executable_path
+    BASE_URL = "https://www.hudl.com"
+
+    # Login Page Variables
+    LOGIN_TITLE = "Log In - Hudl"
+
+    # Logged In Home Variables
+    LOGGED_IN_TITLE = "Home - Hudl"
