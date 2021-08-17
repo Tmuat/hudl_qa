@@ -51,3 +51,11 @@ class Test_HUDL_Login(Test_HUDL_Base):
         """
         self.loginpage = LoginPage(self.driver)
         self.assertIn(TestData.LOGIN_TITLE, self.loginpage.driver.title)
+
+    def test_login_successfull(self):
+        """
+        Assert if with the right credentials you can login to the site.
+        """
+        self.loginpage = LoginPage(self.driver)
+        self.loginpage.login()
+        self.assertIn(TestData.LOGGED_IN_TITLE, self.loginpage.driver.title)

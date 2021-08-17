@@ -2,7 +2,6 @@
 import inspect
 import os
 import sys
-import time
 
 # Used to get the current directory of this file
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
