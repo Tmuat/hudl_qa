@@ -2,6 +2,7 @@
 import inspect
 import os
 import sys
+import time
 
 # Used to get the current directory of this file
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -10,8 +11,12 @@ parentdir = os.path.dirname(currentdir)
 # Insert the path to the other folders
 sys.path.insert(0, parentdir)
 
+# Third Party Imports
+from selenium.webdriver.common.by import By
+
 # Local imports
 from utils.test_data import TestData
+from utils import env, locators
 
 
 class BasePage:
@@ -43,3 +48,17 @@ class LoginPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
+        self.driver.get(TestData.BASE_URL + "/login/")
+
+        self.email = env.email
+        self.password = env.password
+
+        self.email_input = locators.Locators.EMAIL_INPUT
+        self.password_input = locators.Locators.PASSWORD_INPUT
+        self.submit = locators.Locators.SUBMIT_BUTTON
+
+    def login(self):
+        self.driver.find_element(By.ID, self.email_input).send_keys(self.email)
+        self.driver.find_element(By.ID, self.password_input).send_keys(self.password)
+
+        self.driver.find_element(By.ID, self.submit).click()
