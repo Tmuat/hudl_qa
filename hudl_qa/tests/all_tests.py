@@ -2,6 +2,7 @@
 import inspect
 import os
 import sys
+import unittest
 
 # Used to get the current directory of this file
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -14,21 +15,23 @@ sys.path.insert(0, parentdir)
 from selenium import webdriver
 
 # Local Imports
+from pages.pages import HomePage
 from utils.test_data import TestData
 
 
-def setup():
-    return webdriver.Chrome(TestData.CHROME_EXECUTABLE_PATH)
+# Creating a base class for all tests to use
+class Test_HUDL_Base(unittest.TestCase):
+    def setUp(self):
+        """
+        Defining and setting up how we want to run Selinium.
+        Including maximising the window.
+        """
+        self.driver = webdriver.Chrome(TestData.CHROME_EXECUTABLE_PATH)
+        self.driver.maximize_window()
 
-
-def logintest():
-    driver = setup()
-
-    driver.get("https://www.hudl.com/login")
-    driver.set_page_load_timeout(30)
-
-    driver.quit()
-
-
-if __name__ == "__main__":
-    logintest()
+    def tearDown(self):
+        """
+        After each test has executed cleanup ready for another test.
+        """
+        self.driver.close()
+        self.driver.quit()
