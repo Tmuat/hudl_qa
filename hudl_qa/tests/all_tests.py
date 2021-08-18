@@ -197,3 +197,14 @@ class Test_HUDL_Login(Test_HUDL_Base):
         else:
             element_found = False
         self.assertTrue(element_found)
+
+    def test_010_login_successfull_with_enter(self):
+        """
+        Assert if with the right credentials you can login to the site by
+        pressing the enter key.
+        """
+        self.loginpage = LoginPage(self.driver)
+        self.loginpage.login_enter_key()
+
+        time.sleep(4)
+        self.assertIn(TestData.LOGGED_IN_TITLE, self.loginpage.driver.title)

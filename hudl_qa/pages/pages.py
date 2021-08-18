@@ -12,6 +12,7 @@ sys.path.insert(0, parentdir)
 
 # Third Party Imports
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 # Local imports
 from utils.test_data import TestData
@@ -94,3 +95,9 @@ class LoginPage(BasePage):
         )
 
         self.driver.find_element(By.ID, self.submit).click()
+
+    def login_enter_key(self):
+        self.driver.find_element(By.ID, self.email_input).send_keys(self.email)
+        self.driver.find_element(By.ID, self.password_input).send_keys(self.password)
+
+        self.driver.find_element(By.ID, self.submit).send_keys(Keys.RETURN)
