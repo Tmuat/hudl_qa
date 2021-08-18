@@ -182,3 +182,18 @@ class Test_HUDL_Login(Test_HUDL_Base):
             By.XPATH, Locators.ERROR_TEXT_LOCATOR
         ).text
         self.assertEqual(TestData.LOGIN_ERROR_TEXT, error_text)
+
+    def test_009_password_input_type(self):
+        """
+        Assert that the password input type is password and therefore
+        masked.
+        """
+        self.loginpage = LoginPage(self.driver)
+        if (
+            len(self.loginpage.driver.find_elements(By.XPATH, Locators.PASSWORD_TYPE))
+            > 0
+        ):
+            element_found = True
+        else:
+            element_found = False
+        self.assertTrue(element_found)
