@@ -169,3 +169,16 @@ class Test_HUDL_Login(Test_HUDL_Base):
         else:
             element_found = False
         self.assertTrue(element_found)
+
+    def test_008_error_text(self):
+        """
+        Assert if the correct error text is shown when a login error
+        occurs.
+        """
+        self.loginpage = LoginPage(self.driver)
+        self.loginpage.incorrect_password_login()
+        time.sleep(2)
+        error_text = self.loginpage.driver.find_element(
+            By.XPATH, Locators.ERROR_TEXT_LOCATOR
+        ).text
+        self.assertEqual(TestData.LOGIN_ERROR_TEXT, error_text)
