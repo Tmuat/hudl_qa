@@ -70,3 +70,6 @@ class LoginPage(BasePage):
         self.driver.find_element(By.ID, self.password_input).send_keys(self.password)
 
         self.driver.find_element(By.ID, self.submit).click()
+
+    def empty_email_and_password_login(self):
+        self.driver.find_element(By.ID, self.submit).click()

@@ -85,3 +85,24 @@ class Test_HUDL_Login(Test_HUDL_Base):
         else:
             element_found = False
         self.assertTrue(element_found)
+
+    def test_004_empty_email_and_password(self):
+        """
+        Assert if the no email and password is passed, the user cannot
+        login and an error message will be shown.
+        """
+        self.loginpage = LoginPage(self.driver)
+        self.loginpage.empty_email_and_password_login()
+        time.sleep(2)
+        if (
+            len(
+                self.loginpage.driver.find_elements(
+                    By.CLASS_NAME, Locators.ERROR_LOCATOR
+                )
+            )
+            > 0
+        ):
+            element_found = True
+        else:
+            element_found = False
+        self.assertTrue(element_found)
