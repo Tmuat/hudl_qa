@@ -6,3 +6,4 @@ class Locators:
     EMAIL_INPUT = "email"
     PASSWORD_INPUT = "password"
     SUBMIT_BUTTON = "logIn"
+    ERROR_LOCATOR = "login-error"

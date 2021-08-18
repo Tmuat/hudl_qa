@@ -14,9 +14,11 @@ sys.path.insert(0, parentdir)
 
 # Third Party Imports
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 # Local Imports
 from pages.pages import LoginPage
+from utils.locators import Locators
 from utils.test_data import TestData
 
 
@@ -59,5 +61,27 @@ class Test_HUDL_Login(Test_HUDL_Base):
         """
         self.loginpage = LoginPage(self.driver)
         self.loginpage.login()
-        time.sleep(3)
+
+        time.sleep(4)
         self.assertIn(TestData.LOGGED_IN_TITLE, self.loginpage.driver.title)
+
+    def test_003_incorrect_email(self):
+        """
+        Assert if the wrong email is passed, the user cannot login and
+        an error message will be shown.
+        """
+        self.loginpage = LoginPage(self.driver)
+        self.loginpage.incorrect_email_login()
+        time.sleep(2)
+        if (
+            len(
+                self.loginpage.driver.find_elements(
+                    By.CLASS_NAME, Locators.ERROR_LOCATOR
+                )
+            )
+            > 0
+        ):
+            element_found = True
+        else:
+            element_found = False
+        self.assertTrue(element_found)

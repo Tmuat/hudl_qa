@@ -50,6 +50,7 @@ class LoginPage(BasePage):
         self.driver.get(TestData.BASE_URL + "/login/")
 
         self.email = env.email
+        self.incorrect_email = "Not_A_User@fakeemail.com"
         self.password = env.password
 
         self.email_input = locators.Locators.EMAIL_INPUT
@@ -58,6 +59,14 @@ class LoginPage(BasePage):
 
     def login(self):
         self.driver.find_element(By.ID, self.email_input).send_keys(self.email)
+        self.driver.find_element(By.ID, self.password_input).send_keys(self.password)
+
+        self.driver.find_element(By.ID, self.submit).click()
+
+    def incorrect_email_login(self):
+        self.driver.find_element(By.ID, self.email_input).send_keys(
+            self.incorrect_email
+        )
         self.driver.find_element(By.ID, self.password_input).send_keys(self.password)
 
         self.driver.find_element(By.ID, self.submit).click()
